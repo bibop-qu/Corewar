@@ -26,7 +26,7 @@ static int	get_line(t_head *champ, char *buff, int line)
 	ft_strdel(&buff);
 	if (!(new_line = ft_lst_create_no_malloc(tmp_buff)))
 		return (send_id("no_malloc_link", line));
-	if (!ft_lst_push_back(champ, new_line))
+	if (!ft_lst_push_back(&champ, new_line))
 		return (send_id("no_malloc_link", line));
 	return (0);
 }
@@ -57,7 +57,7 @@ static void	delete_all(t_head *champ, char *buff)
 **	Calling to open and close files
 */
 
-static int	open_files(char **argv, char *file_name)
+static int	open_files(char *file_name)
 {
 	int		res_open;
 	int		i;
@@ -77,7 +77,7 @@ static int	open_files(char **argv, char *file_name)
 			if (get_line(&champ, buff, line))
 				i = 1;
 		}
-		if (check_content(champ.first, file_name, char **argv))
+		if (check_content(champ.first, file_name))
 			i = 1;
 	}
 	delete_all(&champ, buff);
@@ -87,21 +87,24 @@ static int	open_files(char **argv, char *file_name)
 }
 
 /*
-**	You know that
+**	You know that, option is an int define in corewar.h
 */
 
 int			main(int argc, char **argv)
 {
 	int	i;
 
+	option = 0;
 	i = 0;
-	if (argc < 1)
+	if (argc < 2 || argc > MAX_ARGS_NUMBER)
 		return (send_id("usage", 0));
 	if (!ft_strcmp(argv[1], "-a"))
+	{
 		option = 1;
+		i++;
+	}
 	while (++i < argc)
-		;
-	if (open_files(argv, argv[i]))
-		return (1);
+		if (open_files(argv[i]))
+			return (1);
 	return (0);
 }

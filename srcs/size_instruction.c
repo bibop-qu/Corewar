@@ -49,34 +49,34 @@ void		push_label(t_order **pos, t_order *new)
 **	Check if the string finding is a real label or other
 */
 
-static char	*check_is_real(char **str)
+static char	*check_is_real(char *str)
 {
 	char	*tmp;
 	char	*find;
 
-	tmp = *str;
-	find = ft_strchr(*str, LABEL_CHAR);
+	tmp = str;
+	find = ft_strchr(str, LABEL_CHAR);
 	while (tmp != find)
 	{
 		if (!ft_isalnum(*tmp) && *tmp != '_')
 			return (NULL);
 		++tmp;
 	}
-	return (*str);
+	return (str);
 }
 
 /*
 **	Find if line is a label or instruction
 */
 
-void		find_pos_label(char **data, unsigned int *size, t_order **label_pos)
+void		find_pos_label(char *data, unsigned int *size, t_order **label_pos)
 {
 	t_order	*new;
 	char	*label;
 
 	if (check_is_real(data))
 	{
-		label = ft_strsep(data, ":");
+		label = ft_strsep(&data, ":");
 		new = create_label(size, label);
 		push_label(label_pos, new);
 	}

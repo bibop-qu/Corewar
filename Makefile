@@ -44,7 +44,6 @@ NAME 		= asm
 #SRCRS:
 SRCS 		= \
 			check_content.c \
-#			create_file_cor.c \
 			debug.c \
 			find_prerequis.c \
 			main.c \
@@ -55,7 +54,8 @@ SRCS 		= \
 			create_instruction.c \
 			check_flags.c \
 			parse_strsep.c \
-			arg.c
+			arg.c \
+			option.c
 
 #OBJ:
 OBJS = $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))

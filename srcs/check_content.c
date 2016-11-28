@@ -44,8 +44,8 @@ void	fill_instruction(t_head **head, int i, char *str)
 
 	tmp = (t_instruct *)(*head)->last->data;
 	value = define_type(str);
-	i = 0;
-//	tmp->arg_type[i] = value;
+//	i = 0;
+	tmp->arg_type[i] = &value;
 }
 
 /*
@@ -96,14 +96,15 @@ int	check_content(t_lst *champ, char *file_name)
 		++var.line;
 		if (find_prerequis(cpy->data, &var.flag, var.line))
 			return (1);
-		if (find_label(&var.flag, var.line))
+		if (!find_label(&var.flag, var.line))
 			find_pos_label(cpy->data, &var.pos, &label_pos);
 		if (find_instruction(cpy->data, &var.flag, var.line, &head))
 			return (1);
+		ft_putendl("TEST1");
 		cpy = cpy->next;
 	}
 	if (option == 1)
-		print_option();
+		print_option(file_name);
 //	else if (option == 0)
 	//open_new_file(file_name, head, label_pos);
 	return (0);

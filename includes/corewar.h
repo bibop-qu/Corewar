@@ -48,7 +48,7 @@
 ** Global variable for option -a
 */
 
-int option = 0;
+int option;
 
 /*
 **	Define a strusture who contain all error massage
@@ -99,7 +99,7 @@ void					write_name(char *data, t_header *head,
 		unsigned int *size);
 void					write_comment(char *data, t_header *head,
 		unsigned int *size);
-void					find_pos_label(char **data, unsigned int *size,
+void					find_pos_label(char *data, unsigned int *size,
 		t_order **pos);
 char					*ft_strsep(char **str, const char *delim);
 void					print_header(t_header head, int res_open);
@@ -113,5 +113,6 @@ int						define_type(char *str);
 
 void					print_champ_data(t_head *champ);
 void					print_content(char **tab);
+void					print_option(char *file_name);
 
 #endif

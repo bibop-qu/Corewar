@@ -35,11 +35,11 @@ int		define_type(char *str)
 	else if (str[0] == 'r' && ft_atoi(str++) <= REG_NUMBER)
 		return (T_REG);
 	while (str[++i] && ft_isalpha(str[i]))
-		if (str[i + 1] = '\0')
+		if (str[i + 1] == '\0')
 			return (T_IND);
 	i = -1;
-	while (str[++i] && is_label_chars(str[i]))
-		if (str[i + 1] = '\0')
+	while (str[++i] && is_in_label_chars(str[i]))
+		if (str[i + 1] == '\0')
 			return (T_LAB);
 	return (0);
 }
