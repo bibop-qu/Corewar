@@ -100,16 +100,14 @@ static char		*change_name(char *file_name)
 
 void			open_new_file(char *file_name, t_head *head, t_order *label_pos)
 {
-	t_lst	*cpy;
 	int		res_open;
 
 	//TODO Modif that !!
-	cpy = head->data;
+	(void)label_pos;
 	file_name = change_name(file_name);
 	if ((res_open = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0755)) < 0)
 		send_id("", 0);
-	write_instruction(champ, res_open);
+	write_instruction(head->first, res_open);
 	if (close(res_open) < 0)
 		return ;
-	free(file_name);
 }
