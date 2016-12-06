@@ -12,6 +12,23 @@
 
 #include "corewar.h"
 
+char	*ft_strcut(char *str)
+{
+	int		i;
+	char	*cpy;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (ft_isalpha(str[i]))
+		i++;
+	cpy = (char *)malloc(sizeof(char) * i + 1);
+	cpy[i] = '\0';
+	while (--i >= 0)
+		cpy[i] = str[i];
+	return (cpy);
+}
+
 static int	ft_compare(char c, const char *str)
 {
 	char	*tmp;

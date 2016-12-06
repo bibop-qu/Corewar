@@ -38,6 +38,7 @@ void		create_instruction(t_head **head, int index)
 	if (!(new->data = (t_instruct *)malloc(sizeof(t_instruct))))
 		return ;
 	new->next = NULL;
+	//FT_LST_PUSH_BACK DONT WORK
 	ft_lst_push_back(head, new);
 	complet_elem(head, index);
 }

@@ -106,6 +106,7 @@ void					print_header(t_header head, int res_open);
 void					create_instruction(t_head **head, int index);
 int						find_label(unsigned char *flag, int line);
 int						define_type(char *str);
+char	*ft_strcut(char *str);
 
 /*
 **	Use to debuging in debug.c

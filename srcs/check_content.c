@@ -18,6 +18,7 @@
 
 int	search_instruction(char *str, int line)
 {
+	ft_putendl(str);
 	int			i;
 	extern t_op	g_op_tab[17];
 	i = 0;
@@ -28,7 +29,6 @@ int	search_instruction(char *str, int line)
 		++i;
 	}
 	send_id("token", line);
-	ft_putendl(str);
 	return (0);
 }
 
@@ -38,7 +38,7 @@ int	search_instruction(char *str, int line)
 
 void	fill_instruction(t_head **head, int i, char *str)
 {
-
+	ft_putendl("fill_instruction");
 	t_instruct	*tmp;
 	int			value;
 
@@ -46,14 +46,16 @@ void	fill_instruction(t_head **head, int i, char *str)
 	value = define_type(str);
 //	i = 0;
 	tmp->arg_type[i] = &value;
+	ft_putnbr(tmp->op_code);
 }
 
 /*
 **	Check if  instructions are valide
 */
 
-int	find_instruction(char **data, unsigned char *flag, int line, t_head **head)
+int	find_instruction(char *data, unsigned char *flag, int line, t_head **head)
 {
+//	ft_putendl(data);
 	char		*new;
 	int			index;
 	int			i;
@@ -61,15 +63,17 @@ int	find_instruction(char **data, unsigned char *flag, int line, t_head **head)
 
 	(void)flag;
 	i = 0;
-	while (!(new = ft_strsep(data, " ")))
+	while (!(new = ft_strsep(&data, " ")))
 			;
+	new = ft_strcut(new);
 	new = ft_strtrim(new);
 	if ((index = search_instruction(new, line)))
 	{
 		create_instruction(head, index);
+		ft_putendl("YES");
 		while (i < g_op_tab[index].nb_arg)
 		{
-			fill_instruction(head, i, ft_strsep(data, ","));
+			fill_instruction(head, i, ft_strsep(&data, ","));
 			++i;
 		}
 	}
@@ -100,9 +104,10 @@ int	check_content(t_lst *champ, char *file_name)
 			find_pos_label(cpy->data, &var.pos, &label_pos);
 		if (find_instruction(cpy->data, &var.flag, var.line, &head))
 			return (1);
-		ft_putendl("TEST1");
+		ft_putendl("after find_instruction");
 		cpy = cpy->next;
 	}
+	ft_putendl("yolo");
 	if (option == 1)
 		print_option(file_name);
 //	else if (option == 0)
